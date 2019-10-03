@@ -6,7 +6,8 @@
     'depends': [
         'mail',
         'sale',
-        'purchase'
+        'purchase',
+        'account'
     ],
     'author': 'Quadit, S.A. de C.V.',
     'description': 'eDiversa',

@@ -396,47 +396,7 @@ class ediversaOrder(models.Model):
                             'nadud_provincia': item[8] if len(item) >= 9 else False,
                         })
 
-                    # if item[0] == 'CTABY':
-                    #     if not len(item) == 1:
-                    #         Warning(('Please fixing manual'))
-                    #     vals.update({
-                    #         'info_contacto': item[1],
-                    #         'nombre_contacto': item[2],
-                    #     })
-
-                    # if item[0] == 'COMUD':
-                    #     if not len(item) == 2:
-                    #         Warning(('Please fixing manual'))
-                    #     vals.update({
-                    #         'medio_contac': item[1],
-                    #         'info': item[2],
-                    #     })
-                        # if item[0] == 'PIALIN':
-                        # if not len(item) == 2:
-                        #     Warning(('Please fixing manual'))
-                        # xline = [{
-                        #     'pialin_calificador': item[1],
-                        #     'pialin_ref_articulo': item[2],
-                        # }]
-                        # pialin.append(xline)
-                        # for f in pialin:
-                        #     for p in f:
-                        #         _logger.info ("########################p",p)
-                        #     _logger.info ("########################f",f)
-                        #     if p["pialin_ref_articulo"] != '0':
-                        #         _logger.info("codigo interno del articulo")
-                        #     else:
-                        #         False
-                        #         _logger.info ("########################pialin_ref_articulo", f["pialin_ref_articulo"])
-                        #     if p.has_key('pialin_calificador'):
-                        #         if p["pialin_calificador"] == 'SA':
-                        #             _logger.info("codigo interno del articulopor el proveedor")
-                        #         else:
-                        #             False
-                        #         if p["pialin_calificador"] == 'IN':
-                        #             _logger.info("codigo interno del comprador")
-                        #         else:
-                                    # False
+                    
 
                     if item[0] == 'TAX':
                         if not len(item) == 1:
@@ -1004,55 +964,7 @@ class ediversaOrder(models.Model):
                                 'qtylin_especificador_unidad': item[3] if len(item) >= 4 else False,
                             }]
                             qtylin.append(xline)
-                        # for f in qtylin:
-                        #     print("#################################f",f)
-                        #     for p in f:
-                        #         print("########################################p",p)
-                        #         if p["qtylin_cantidad_expresada"] != '0':
-                        #            print("###############################cantidad necesaria")
-                        #         else:
-                        #             False
-                        #             if p.has_key('qtylin_unidad_medida'):
-                        #                 if p["qtylin_unidad_medida"] == '21':
-                        #                     _logger.info("unidades pedidas del articulo")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_unidad_medida"] == '59':
-                        #                     _logger.info("numero de unidades de consumo por unidad de expedicion")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_unidad_medida"] == '15E':
-                        #                     _logger.info("cantidad de mercancia sin cargo")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_unidad_medida"] == '61':
-                        #                     _logger.info("cantidad devuelta")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_unidad_medida"] == '17E':
-                        #                     _logger.info("unidad nivel de subembalaje")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_unidad_medida"] == '192':
-                        #                     _logger.info("cantidad gratuita incluida")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_especificador_unidad"] == 'KGM':
-                        #                     _logger.info("kilogramos")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_especificador_unidad"] == 'PCE':
-                        #                     _logger.info("unidades")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_especificador_unidad"] == 'LTR':
-                        #                     _logger.info("litros")
-                        #                 else:
-                        #                     False
-                        #                 if p["qtylin_especificador_unidad"] == 'MTR':
-                        #                     _logger.info("metros")
-                        #                 else:
-                        #                     False
+                       
 
                     vals.update({'qtylin_row': qtylin})
                     # print("#############################p",p)
@@ -1405,11 +1317,11 @@ class ediversaOrder(models.Model):
                              ('type', '=', 'invoice')
                              ])
                         # print("#######################################partner_recordset",partner_recordset)
-                        if not factu_recordset:
-                            post_vars = {'subject': 'Mensaje', 'body': _('The code not exists %r' % str(nad['nadiv_punto_oper_fac'])), }  # noqa
-                            self.message_post(type="notification", subtype="mt_comment", **post_vars)  # noqa
-                        for record in factu_recordset:
-                            print("#######################################record",record)
+                        #if not factu_recordset:
+                           #post_vars = {'subject': 'Mensaje', 'body': _('The code not exists %r' % str(nad['nadiv_punto_oper_fac'])), }  # noqa
+                           # self.message_post(type="notification", subtype="mt_comment", **post_vars)  # noqa
+                        #for record in factu_recordset:
+                            #print("#######################################record",record)
 
 
         if vals.has_key('naddp_row'):
@@ -1489,7 +1401,7 @@ class ediversaOrder(models.Model):
                             raise Warning(_('The partner can not be found!'))
                         order = {
                                 'partner_id': partner_recordset.id,
-                                'partner_invoice_id' : factu_recordset.id,
+                                #'partner_invoice_id' : factu_recordset.id,
                                 'partner_shipping.id' : dir_recordset.id,
                                 'order_line': [line for line in line_list],
                                  }

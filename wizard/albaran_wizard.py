@@ -186,7 +186,7 @@ class export_albaran_txt(models.Model):
     nadsu_cod_prove = fields.Char('codigo EDI Proveedor')
     nadby_cod_cliente = fields.Char('codigo EDI Cliente')
     naddp_cod_entrega = fields.Char('codigo EDI punto de entrega')
-    cps_empacado = fields.Selection([
+    """cps_empacado = fields.Selection([
         ('1', 'Nivel de envio'),
         ('2', 'segundo nivel'),
         ('3', 'tercer nivel')],
@@ -194,7 +194,7 @@ class export_albaran_txt(models.Model):
     cps_predecesor = fields.Selection([
         ('2', '1'),
         ('3', '2')],
-        'Predecesor', required=True)
+        'Predecesor', required=True)"""
     pac_num_embalajes = fields.Char('Numero de bultos', readonly=True)
     pac_tipo_unidad = fields.Selection([
         ('CT', 'Caja de cartón'),
@@ -340,7 +340,7 @@ class export_albaran_txt(models.Model):
                 cont_1 = cont_1+1
                 cont_2 = cont_2+1
                 campo_cps = "%s|%s|%s" % (
-                    "CPS", str(cont_1), str(cont_2))
+                    "CPS", str(cont_1), "2")
                 campo_pac = "%s|%s|%s" % (
                     "PAC", str(cont_1_pac),  self.pac_tipo_unidad_palet)
                 cabecera += campo_cps +  sl + campo_pac
@@ -360,7 +360,7 @@ class export_albaran_txt(models.Model):
                 cont_1 = cont_1+1
                 cont_2 = cont_2+1
                 contador_bulto= move.id_bultos
-            print("##############################contador_bulto", contador_bulto)
+            
             campo_lin = "%s|%s|%s" % (
                 "LIN", move.product_id.barcode, self.lin_tipo_cod)
             campo_pialin = "%s|%s|%s" % (
