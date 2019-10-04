@@ -59,7 +59,7 @@
                     <field name="datas_fname" invisible="1" />
                     <field name="download_file" invisible="1" />
                 </header>
-                <sheet attrs="{'invisible':[('download_file','=',True)]}">
+                <sheet >
                     <separator colspan="4" string="Presiona Exportar para Generar el albaran"/>
                     <group col="4">
                         <field name="type" required="1"/>

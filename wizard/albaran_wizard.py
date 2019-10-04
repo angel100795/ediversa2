@@ -289,9 +289,10 @@ class export_albaran_txt(models.Model):
         date_entrega = split_entrega[0]+ split_entrega[1]+ split_entrega_dia[0]
 
         #split de referencia
-        split_referencia  = self.env['stock.picking'].browse(picking_ids).sale_id.date_order.split('-')
+        print ("------------______--------",self.env['stock.picking'].browse(picking_ids).sale_id.date_order)
+        """split_referencia  = self.env['stock.picking'].browse(picking_ids).sale_id.date_order.split('-')
         split_referencia_dia = split_referencia[2].split(' ')
-        date_referencia = split_referencia[0]+ split_referencia[1]+ split_referencia_dia[0]
+        date_referencia = split_referencia[0]+ split_referencia[1]+ split_referencia_dia[0]"""
 
         date = datetime.now().strftime('%d-%m-%Y')
         datas_fname = "Albaran "+str(date)+".txt"  # Nombre del Archivo
@@ -304,8 +305,12 @@ class export_albaran_txt(models.Model):
                 "DTM", date_creacion, date_entrega )
             campo_ali = "%s|%s" % (
                 "ALI", self.ali_info)
-            campo_rff = "%s|%s|%s|%s" % (
+            if hasattr(picking,'picking.order_reference'):
+                campo_rff = "%s|%s|%s|%s" % (
                 "RFF", self.rff_cali, picking.order_reference, date_referencia)
+            else:
+                campo_rff = "%s|%s" % (
+                "RFF", self.rff_cali)
             campo_nadms = "%s|%s" % (
                 "NADMS", picking.company_id.partner_id.codigo_provedor)
             campo_nadmr = "%s|%s" % (
