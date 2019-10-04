@@ -47,6 +47,8 @@
         </field>
     </record>
 
+ 
+
 
     <!--======FORM VIEW ======-->
     <record id="expor_school_amount_form" model="ir.ui.view">
@@ -124,13 +126,6 @@
         view_mode="form" target="new"
         key2="client_action_multi"
         id="action_export_report_school"/>
-
-<!--     <menuitem
-        id="id_menu_wizard_report_export"
-        parent="id_buzon_entrada"
-        name="Albaran"
-        action="action_export_report_school"
-        sequence="0"/> -->
 
 
 </data>
