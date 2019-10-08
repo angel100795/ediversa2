@@ -136,16 +136,16 @@ class export_albaran_txt(models.Model):
                     code_dby = child.code_nadby
             #print "########### ORDER REFERENCE >>>>>>>>>>>>>>> ", picking.number_of_packages
             res.update({
-                #'bgm_num_doc':picking.name,
+                'bgm_num_doc':picking.name,
                 #'naddp_cod_entrega': code_ddp,
                 #'nadby_cod_cliente': code_dby,
-                #'dtm_entrega':picking.min_date,
-                #'rff_referencia':picking.order_reference,
-                #'rff_fecha':picking.sale_id.date_order,
-                #'nadms_cod_emisor_mens':picking.company_id.partner_id.codigo_provedor,
-                #'nadmr_cod_emisor_mens':picking.partner_id.codigo_provedor,
-                #'nadsu_cod_prove':picking.company_id.partner_id.codigo_provedor,
-                #'pac_num_embalajes':picking.number_of_packages,
+                'dtm_entrega':picking.min_date,
+                'rff_referencia':picking.order_reference,
+                'rff_fecha':picking.sale_id.date_order,
+                'nadms_cod_emisor_mens':picking.company_id.partner_id.codigo_provedor,
+                'nadmr_cod_emisor_mens':picking.partner_id.codigo_provedor,
+                'nadsu_cod_prove':picking.company_id.partner_id.codigo_provedor,
+                'pac_num_embalajes':picking.number_of_packages,
                 'cntres_lines':cont_cntres
                 })
         print("######################################res1", res)
@@ -165,7 +165,7 @@ class export_albaran_txt(models.Model):
         ('7', 'Duplicado'),
         ('1', 'Cancelacion')],
         "Funcion del Mensaje", required=True, default="9")
-    # dtm_entrega = fields.Char('Fecha entrega')
+    #dtm_entrega = fields.Char('Fecha entrega')
     dtm_creacion = fields.Datetime ('Fecha creacion', readonly = False, select = True 
                                 , default = lambda self: fields.datetime.now ())
     ali_info = fields.Selection([
@@ -290,10 +290,10 @@ class export_albaran_txt(models.Model):
 
         #split de referencia
         print ("------------______--------",self.env['stock.picking'].browse(picking_ids).sale_id.date_order)
-        """split_referencia  = self.env['stock.picking'].browse(picking_ids).sale_id.date_order.split('-')
-        split_referencia_dia = split_referencia[2].split(' ')
-        date_referencia = split_referencia[0]+ split_referencia[1]+ split_referencia_dia[0]"""
-
+        """ LA FECHA SIGUE MARCANDO ERROR LA DEVUELVE COMO VACIA
+            split_referencia  = self.env['stock.picking'].browse(picking_ids).sale_id.date_order.split('-')
+        split_referencia_dia = split_referencia[2].split(' ')"""
+        #date_referencia = split_referencia[0]+ split_referencia[1]+ split_referencia_dia[0]
         date = datetime.now().strftime('%d-%m-%Y')
         datas_fname = "Albaran "+str(date)+".txt"  # Nombre del Archivo
         sl = "\n"
