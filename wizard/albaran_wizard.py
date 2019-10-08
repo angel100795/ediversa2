@@ -135,6 +135,9 @@ class export_albaran_txt(models.Model):
                 if child.code_nadby:
                     code_dby = child.code_nadby
             #print "########### ORDER REFERENCE >>>>>>>>>>>>>>> ", picking.number_of_packages
+            #print("CODIGO-------------------------------",picking.company_id.partner_id.codigo_provedor)
+            #print("CODIGO2-------------------------------",child.code_naddp)
+            #print("CODIGO3-------------------------------",child.code_nadby)
             res.update({
                 'bgm_num_doc':picking.name,
                 #'naddp_cod_entrega': code_ddp,
@@ -186,7 +189,7 @@ class export_albaran_txt(models.Model):
     nadsu_cod_prove = fields.Char('codigo EDI Proveedor')
     nadby_cod_cliente = fields.Char('codigo EDI Cliente')
     naddp_cod_entrega = fields.Char('codigo EDI punto de entrega')
-    """cps_empacado = fields.Selection([
+    cps_empacado = fields.Selection([
         ('1', 'Nivel de envio'),
         ('2', 'segundo nivel'),
         ('3', 'tercer nivel')],
@@ -194,7 +197,7 @@ class export_albaran_txt(models.Model):
     cps_predecesor = fields.Selection([
         ('2', '1'),
         ('3', '2')],
-        'Predecesor', required=True)"""
+        'Predecesor', required=True)
     pac_num_embalajes = fields.Char('Numero de bultos', readonly=True)
     pac_tipo_unidad = fields.Selection([
         ('CT', 'Caja de cartón'),
@@ -290,10 +293,12 @@ class export_albaran_txt(models.Model):
 
         #split de referencia
         print ("------------______--------",self.env['stock.picking'].browse(picking_ids).sale_id.date_order)
-        """ LA FECHA SIGUE MARCANDO ERROR LA DEVUELVE COMO VACIA
-            split_referencia  = self.env['stock.picking'].browse(picking_ids).sale_id.date_order.split('-')
-        split_referencia_dia = split_referencia[2].split(' ')"""
-        #date_referencia = split_referencia[0]+ split_referencia[1]+ split_referencia_dia[0]
+        """La operacion del split es correcta
+        solo que en la orden debe de efectuarse de manera correcta si no
+        mostrara error"""
+        split_referencia  = self.env['stock.picking'].browse(picking_ids).sale_id.date_order.split('-')
+        split_referencia_dia = split_referencia[2].split(' ')
+        date_referencia = split_referencia[0]+ split_referencia[1]+ split_referencia_dia[0]
         date = datetime.now().strftime('%d-%m-%Y')
         datas_fname = "Albaran "+str(date)+".txt"  # Nombre del Archivo
         sl = "\n"
@@ -305,12 +310,15 @@ class export_albaran_txt(models.Model):
                 "DTM", date_creacion, date_entrega )
             campo_ali = "%s|%s" % (
                 "ALI", self.ali_info)
-            if hasattr(picking,'picking.order_reference'):
+            """if hasattr(picking,'picking.order_reference'):
                 campo_rff = "%s|%s|%s|%s" % (
                 "RFF", self.rff_cali, picking.order_reference, date_referencia)
             else:
                 campo_rff = "%s|%s" % (
-                "RFF", self.rff_cali)
+                "RFF", self.rff_cali)"""
+            campo_rff = "%s|%s|%s|%s" % (
+                "RFF", self.rff_cali, picking.order_reference, date_referencia)
+
             campo_nadms = "%s|%s" % (
                 "NADMS", picking.company_id.partner_id.codigo_provedor)
             campo_nadmr = "%s|%s" % (

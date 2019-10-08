@@ -37,9 +37,9 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <group attrs="{'invisible': [('type','=', 'contact')]}" position="inside">
-                    <field name="code_nadby" attrs="{'invisible': [('type','!=', 'invoice')]}"/>
-                    <field name="code_naddp" attrs="{'invisible': [('type','!=', 'delivery')]}"/>
+                <group  position="inside">
+                    <field name="code_nadby" />
+                    <field name="code_naddp" />
                 </group>
             </field>
         </record>
