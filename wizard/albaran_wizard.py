@@ -131,8 +131,8 @@ class export_albaran_txt(models.Model):
                 cont_cntres = cont_cntres+1
                 print (move)
                 print("estoy aqui")
-                print(picking.partner_id.child_ids)
-            for child in picking.partner_id.child_ids:
+                print(picking.partner_id)
+            for child in picking.partner_id:
                 print("<----------------->")
                 if child.code_naddp:
                     code_ddp = child.code_naddp
@@ -144,8 +144,8 @@ class export_albaran_txt(models.Model):
             #print("CODIGO3-------------------------------",child.code_nadby)
             res.update({
                 'bgm_num_doc':picking.name,
-                #'naddp_cod_entrega': code_ddp,
-                #'nadby_cod_cliente': code_dby,
+                'naddp_cod_entrega': code_ddp,
+                'nadby_cod_cliente': code_dby,
                 'dtm_entrega':picking.min_date,
                 'rff_referencia':picking.order_reference,
                 'rff_fecha':picking.sale_id.date_order,
