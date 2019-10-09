@@ -129,7 +129,11 @@ class export_albaran_txt(models.Model):
         for picking in picking_id:
             for move in picking.pack_operation_product_ids:
                 cont_cntres = cont_cntres+1
+                print (move)
+                print("estoy aqui")
+                print(picking.partner_id.child_ids)
             for child in picking.partner_id.child_ids:
+                print("<----------------->")
                 if child.code_naddp:
                     code_ddp = child.code_naddp
                 if child.code_nadby:
